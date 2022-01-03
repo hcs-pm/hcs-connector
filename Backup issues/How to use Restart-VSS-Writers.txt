@@ -1,0 +1,15 @@
+The script doesn't do anything on its own. It extends functionality of Powershell. If you just run it it will create a Powershell session with newly declared functions and then will instantly close since the functions aren't being used.
+
+To use it you need to either: 
+1) Copy the entire script contents into a Powershell window. Be careful to copy it entirely it's safe to just do Ctrl + A, Ctrl + C, Ctrl + V;
+2) Or use what's called 'dot sourcing' in Powershell. You would reference a script file adding its contents to the currently open Powershell session. Syntax is this .<space>"Path_to_script.ps1" https://snipboard.io/rkGsYi.jpg
+
+I recommend the dot-sourcing method as it's quicker and more human error prone.
+
+Once you've added the functions to a powershell session, in it new functions become available: 
+
+Get-VSSWriter - gets writers in a specified state, accepted states: 'Stable', 'Failed', 'Waiting for completion';
+Restart-Writer - restarts specified writers;
+To restart writers in a specific state you can feed one command into the other, eg: get-vsswriter "failed" | restart-vsswriter
+
+Also, if you have issues with NTDS service / writer, it's best to just schedule machine for a reboot, as it's a problematic one.
